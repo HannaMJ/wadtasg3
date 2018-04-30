@@ -41,6 +41,7 @@ export class GroupsComponent implements OnInit {
       ]),
       gc: new FormControl("", Validators.required),
       gl: new FormControl("", Validators.required),
+      agl: new FormControl("", Validators.required),
       id: new FormControl("")
     });
 
@@ -58,8 +59,9 @@ export class GroupsComponent implements OnInit {
     const quantity = this.groupForm.get("quantity").value;
     const gc = this.groupForm.get("gc").value;
     const gl = this.groupForm.get("gl").value;
+    const agl = this.groupForm.get("agl").value;
     // sending off to service to save
-    this.groupService.add({ name, quantity, gc, gl });
+    this.groupService.add({ name, quantity, gc, gl, agl });
     this.addedGroupMessage(); // Show confirmation
     this.groupForm.reset(); // clears form
   }
@@ -71,9 +73,10 @@ export class GroupsComponent implements OnInit {
     const quantity = this.groupForm.get("quantity").value;
     const gc = this.groupForm.get("gc").value;
     const gl = this.groupForm.get("gl").value;
+    const agl = this.groupForm.get("agl").value;
     const updated =  new Date();
 
-    const group: Partial<Group> = { name, quantity, gc, gl, updated };
+    const group: Partial<Group> = { name, quantity, gc, gl, agl, updated };
     // sending off to service to update, needs id and other data
     this.groupService.update(id, group);
     this.groupForm.reset(); // clears form
@@ -95,6 +98,7 @@ export class GroupsComponent implements OnInit {
       name: group.name,
       gl: group.gl,
       gc: group.gc,
+      agl: group.agl,
       quantity: group.quantity,
       id: group.id
     });

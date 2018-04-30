@@ -37,10 +37,18 @@
             <input type="text" name="" id="inputGcName" class="form-control" required="required" formControlName="gc">
           </div>
         </div>
+        
         <div class="form-group">
           <label for="inputGlName" class="col-sm-2 control-label">Group Leader Name</label>
           <div class="col-sm-6">
             <input type="text" name="" id="inputGlName" class="form-control" required="required" formControlName="gl">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputAGlName" class="col-sm-2 control-label">Assistant Group Leader Name</label>
+          <div class="col-sm-6">
+            <input type="text" name="" id="inputAGlName" class="form-control" required="required" formControlName="agl">
           </div>
         </div>
         <div class="form-group">
@@ -64,7 +72,8 @@
           <h3 class="panel-title">{{ group.name }}</h3>
         </div>
         <div class="panel-body">
-          GL: {{group.gl}}
+          GL: {{group.gl}} <br>
+          AGL: {{group.agl}}
           <br> GC: {{group.gc}}
           <br> No. of Student: {{group.quantity}}
         </div>
