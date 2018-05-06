@@ -2,14 +2,21 @@ import { Component } from '@angular/core';
 import { ElectronService } from './providers/electron.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from './app.config';
+import { AuthService } from './core/auth.service';
+import { LoginComponent } from './login/login.component';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
+
+  
   constructor(public electronService: ElectronService,
+    private authService: AuthService,
     private translate: TranslateService) {
 
     translate.setDefaultLang('en');

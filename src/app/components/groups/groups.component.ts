@@ -15,6 +15,8 @@ import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
 export class GroupsComponent implements OnInit {
   groups$: Observable<Group[]>;
 
+  readonly path = "groups";
+
   groupForm: FormGroup;
 
   // Used by AlertComponent
@@ -40,12 +42,12 @@ export class GroupsComponent implements OnInit {
         Validators.pattern("^[0-9]*$")
       ]),
       gc: new FormControl("", Validators.required),
-      gl: new FormControl("", Validators.required),
       agl: new FormControl("", Validators.required),
+      gl: new FormControl("", Validators.required),
       id: new FormControl("")
     });
 
-    this.groups$ = this.groupService.getCollection$(ref =>
+    this.groups$ = this.groupService.getCollection$(this.path, ref =>
       ref.orderBy("name", "asc")
     );
 
@@ -61,7 +63,7 @@ export class GroupsComponent implements OnInit {
     const gl = this.groupForm.get("gl").value;
     const agl = this.groupForm.get("agl").value;
     // sending off to service to save
-    this.groupService.add({ name, quantity, gc, gl, agl });
+    this.groupService.add(this.path, { name, quantity, gc, gl, agl });
     this.addedGroupMessage(); // Show confirmation
     this.groupForm.reset(); // clears form
   }
@@ -78,13 +80,13 @@ export class GroupsComponent implements OnInit {
 
     const group: Partial<Group> = { name, quantity, gc, gl, agl, updated };
     // sending off to service to update, needs id and other data
-    this.groupService.update(id, group);
+    this.groupService.update(this.path, id, group);
     this.groupForm.reset(); // clears form
   }
 
   // Delete Group
   remove(id: string) {
-    this.groupService.remove(id);
+    this.groupService.remove(this.path, id);
     this.modalRef.hide();
     this.removedGroupMessage();
   }

@@ -6,8 +6,7 @@ import { AttendancesComponent } from './components/attendances/attendances.compo
 import { GroupsComponent } from './components/groups/groups.component';
 import { TestComponent } from './components/test/test.component';
 import { HomeComponent } from './components/home/home.component';
-
-
+import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -17,6 +16,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   { path: "test", component: TestComponent },
+  { path: "login", component: LoginComponent },
   { path: "groups", component: GroupsComponent },
   { path: "attendances", component: AttendancesComponent },
   { path: "attendances/:id", component: AttendanceSingleViewComponent },

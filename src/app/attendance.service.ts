@@ -1,4 +1,6 @@
-import { Group } from './model/group.model';
+//import { Group } from './model/group.model';
+import { Attendance } from './model/attendance.model';
+import { Module } from './model/module.model';
 import { Injectable } from '@angular/core';
 import {AngularFirestore} from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
@@ -9,31 +11,31 @@ import DocumentReference = firebase.firestore.DocumentReference;
 
 @Injectable()
 export class AttendanceService {
-  readonly path = "groups";
+  // readonly path = "groups";
 
   constructor(private afs: AngularFirestore) {}
 
-  add(data: Group): Promise<DocumentReference> {
+  add(path: string, data: any): Promise<DocumentReference> {
     return this.afs
-      .collection<Group>(this.path)
+      .collection<any>(path)
       .add({ ...data, created: new Date() });
   }
 
-  remove(id: string): Promise<void> {
-    return this.afs.doc<Group>(`${this.path}/${id}`).delete();
+  remove(path: string, id: string): Promise<void> {
+    return this.afs.doc<any>(`${path}/${id}`).delete();
   }
 
-  update(id: string, data: Partial<Group>): Promise<void> {
-    return this.afs.doc<Group>(`${this.path}/${id}`).update(data);
+  update(path: string, id: string, data: any): Promise<void> {
+    return this.afs.doc<any>(`${path}/${id}`).update(data);
   }
 
-  getCollection$(ref?: QueryFn): Observable<Group[]> {
+  getCollection$(path: string, ref?: QueryFn): Observable<any[]> {
     return this.afs
-      .collection<Group>(this.path, ref)
+      .collection<any>(path, ref)
       .snapshotChanges()
       .map(actions => {
         return actions.map(a => {
-          const data = a.payload.doc.data() as Group;
+          const data = a.payload.doc.data() as any;
           const id = a.payload.doc.id;
           return { id, ...data };
         });
